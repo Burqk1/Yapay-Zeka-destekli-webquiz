@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Son Kararım! - Ana Menü</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+    }
+
+
+    h1 {
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+
+
+
+  </style>
+
+  <script>
+    try {
+      if (JSON.parse(localStorage.getItem('darkMode') ?? 'false')) {
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+      }
+    } catch(e){}
+  </script>
+</head>
+<body>
+  <div id="toast" class="toast hidden"></div>
+
+  <div class="profile-container" onclick="toggleDropdown()">
+    <img id="profileImage" src="image/Default_pfp.jpg" alt="Profile Picture" class="profile-pic">
+    <span class="profile-name">Kullanıcı Adı</span>
+  </div>
+
+<div id="profileDropdown" class="dropdown">
+  <label for="profileInput">Profil Resmi Yükle</label>
+  <a onclick="removeProfilePic()" data-key="remove_profile">Profil Resmini Sil</a>
+  <a onclick="logout()" data-key="logout">Çıkış</a>
+</div>
+
+  <input type="file" id="profileInput" accept="image/*" onchange="uploadProfilePic(event)">
+
+  <!-- <div class="menu-container">
+    <h1>Son Kararım!</h1>
+    <a href="katagori.html"><button class="menu-button">Oyuna Başla</button></a>
+    <button class="menu-button" onclick="openSettings()">Ayarlar</button>
+    <a href="highscores.html"><button class="menu-button">Lider Tablosu</button></a>
+  </div> -->
+
+    <div class="menu-container">
+      <h1 data-key="main_title">Son Kararım!</h1>
+      <button class="menu-button" onclick="animatedRedirect('katagori.html')" data-key="start_btn">Oyuna Başla</button>
+      <button class="menu-button" onclick="openSettings()" data-key="settings_btn">Ayarlar</button>
+      <button class="menu-button" onclick="animatedRedirect('leaderboard.html')" data-key="leaderboard_btn">Lider Tablosu</button>
+      <button class="menu-button" id="soruHavuzuBtn" style="display:none;" onclick="animatedRedirect('soruhavuzu.html')">Soru Havuzu</button>
+    </div>
+
+  <div id="settingsModal" class="modal">
+  <div class="modal-content">
+    <h2 data-key="settings_title">Ayarlar</h2>
+
+    <div class="setting-row">
+      <span data-key="sound_label">🔊 Ses</span>
+      <label class="toggle">
+        <input type="checkbox" id="soundToggle" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="setting-row">
+      <span data-key="dark_label">🌗 Karanlık Mod</span>
+      <label class="toggle">
+        <input type="checkbox" id="darkToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+  <div class="modal-actions">
+    <button id="saveBtn"  onclick="saveSettings()" data-key="save_btn">Kaydet</button>
+    <button id="closeBtn" onclick="closeSettings()" data-key="close_btn">Kapat</button>
+  </div>
+  </div>
+</div>
+
+  <script>
+    const DEFAULT_AVATAR = "image/Default_pfp.jpg";
+    const toast = document.getElementById("toast");
+
+    function toggleDropdown() {
+      let dropdown = document.getElementById('profileDropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+    window.onload = async function() {
+      try {
+        const res = await fetch('/api/user');
+        if (!res.ok) {
+          window.location.href = "index.html";
+          return;
+        }
+        const user = await res.json();
+        document.querySelector(".profile-name").textContent = user.username || "Kullanıcı Adı";
+        if(user.profilePic) {
+          document.getElementById("profileImage").src = user.profilePic;
+        } else {
+          document.getElementById("profileImage").src = DEFAULT_AVATAR;
+        }
+        if(user.role === 'teacher') {
+          document.getElementById('soruHavuzuBtn').style.display = 'block';
+        }
+      } catch (err) {
+        document.getElementById("profileImage").src = DEFAULT_AVATAR;
+        window.location.href = "index.html";
+        return;
+      }
+        document.getElementById("settingsModal").style.display = "none";
+        const soundOn  = JSON.parse(localStorage.getItem("soundOn")  ?? "true");
+        const darkMode = JSON.parse(localStorage.getItem("darkMode") ?? "false");
+
+        document.getElementById("soundToggle").checked = soundOn;
+        document.getElementById("darkToggle").checked  = darkMode;
+        applyDarkMode(darkMode);
+    };
+
+    async function uploadProfilePic(event) {
+      const file = event.target.files[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onload = async function(e) {
+              const photoData = e.target.result;
+              document.getElementById('profileImage').src = photoData;
+              try {
+                  const res = await fetch('/api/profile/photo', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ photo: photoData })
+                  });
+                  const data = await res.json();
+                  alert(data.message);
+              } catch (err) {
+                  alert("Sunucu hatası.");
+              }
+          };
+          reader.readAsDataURL(file);
+      }
+    }
+
+    function removeProfilePic() {
+      document.getElementById('profileImage').src = DEFAULT_AVATAR;
+      fetch('/api/profile/photo', { method: 'DELETE' })
+      .then(res => res.json())
+      .then(data => alert(data.message))
+      .catch(err => alert("Sunucu hatası."));
+    }
+
+    function openSettings() {
+      document.getElementById("settingsModal").style.display = "flex";
+      showToast("Ayarları kaydetmeyi unutmayınız.", true);
+
+    }
+
+    function animatedRedirect(url) {
+      document.body.classList.add('page-fade-out');
+      setTimeout(() => {
+        window.location.href = url;
+      }, 500);
+    }
+
+    function goToLeaderboard() {
+      animatedRedirect("leaderboard.html");
+    }
+
+    function goToCategory() {
+      fetch("/api/user").then(res => {
+        if (!res.ok) {
+          showToast("Lütfen önce giriş yapınız.", true);
+          return;
+        }
+        animatedRedirect("katagori.html");
+      });
+    }
+
+   function closeSettings() {
+      const modal = document.getElementById("settingsModal");
+      const content = modal.querySelector(".modal-content");
+
+      content.classList.add("closing");
+
+      content.addEventListener("animationend", function handler(e) {
+        if (e.animationName === "modalOut") {
+          modal.style.display = "none";
+          content.classList.remove("closing");
+          content.removeEventListener("animationend", handler);
+        }
+      });
+    }
+
+
+      function saveSettings() {
+        const soundOn  = document.getElementById("soundToggle").checked;
+        const darkMode = document.getElementById("darkToggle").checked;
+      
+        localStorage.setItem("soundOn",  soundOn);
+        localStorage.setItem("darkMode", darkMode);
+      
+        applyDarkMode(darkMode);   
+
+
+        closeSettings();
+        window.location.reload();
+      }
+
+
+    document.getElementById('profileImage').addEventListener('error', function() {
+      document.getElementById('profileImage').src = DEFAULT_AVATAR;
+    });
+    function logout() {
+      fetch('/api/logout')
+      .then(res => res.json())
+      .then(data => {
+          alert(data.message);
+          window.location.href = "index.html";
+      })
+      .catch(err => alert("Sunucu hatası."));
+    }
+
+    function showToast(message, isError) {
+      toast.textContent = message;
+      toast.classList.remove("hidden");
+      toast.style.backgroundColor = isError ? "#e74c3c" : "#27ae60";
+      setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 3000);
+    }
+
+
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

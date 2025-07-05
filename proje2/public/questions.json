@@ -1,0 +1,418 @@
+{
+  "Teknoloji Modu": [
+    {
+      "soru": "Dünyanın en büyük arama motoru hangisidir?",
+      "secenekler": ["Bing", "Google", "Yahoo", "Yandex"],
+      "dogru": "B"
+    },
+    {
+      "soru": "iPhone'un üreticisi hangi şirkettir?",
+      "secenekler": ["Samsung", "Apple", "Huawei", "Xiaomi"],
+      "dogru": "B"
+    },
+    {
+      "soru": "HTML ne anlama gelir?",
+      "secenekler": ["HyperText Markup Language", "HighText Machine Language", "HyperTool Multi Language", "HomeTool Markup Language"],
+      "dogru": "A"
+    },
+    {
+      "soru": "İlk kişisel bilgisayar hangi yılda tanıtıldı?",
+      "secenekler": ["1975", "1981", "1990", "1969"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Python hangi tür bir programlama dilidir?",
+      "secenekler": ["Derlemeli", "Yorumlanan", "Makine Dili", "Sorgu Dili"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Wi-Fi teknolojisi hangi frekansta çalışır?",
+      "secenekler": ["2.4 GHz", "1 GHz", "10 GHz", "100 MHz"],
+      "dogru": "A"
+    },
+    {
+      "soru": "İlk web tarayıcısı hangisidir?",
+      "secenekler": ["Netscape", "Mosaic", "Internet Explorer", "Chrome"],
+      "dogru": "B"
+    },
+    {
+      "soru": "RAM neyi ifade eder?",
+      "secenekler": ["Read Access Memory", "Random Access Memory", "Run Access Module", "Real Address Memory"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Blockchain teknolojisi ilk olarak ne için kullanıldı?",
+      "secenekler": ["E-posta", "Bitcoin", "Sosyal Medya", "Bulut Depolama"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Linux çekirdeğini kim geliştirdi?",
+      "secenekler": ["Bill Gates", "Steve Jobs", "Linus Torvalds"],
+      "dogru": "C"
+    }
+  ],
+  "Sinema Modu": [
+    {
+      "soru": "Titanic filminin yönetmeni kimdir?",
+      "secenekler": ["Steven Spielberg", "James Cameron", "Christopher Nolan", "Quentin Tarantino"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Oscar ödüllerini veren ülke hangisidir?",
+      "secenekler": ["Fransa", "Amerika", "İngiltere", "Almanya"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Yüzüklerin Efendisi serisinin yönetmeni kimdir?",
+      "secenekler": ["Peter Jackson", "Ridley Scott", "David Fincher", "Martin Scorsese"],
+      "dogru": "A"
+    },
+    {
+      "soru": "İlk sesli film hangisidir?",
+      "secenekler": ["The Jazz Singer", "Citizen Kane", "Metropolis", "Gone with the Wind"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Star Wars serisinin yaratıcısı kimdir?",
+      "secenekler": ["George Lucas", "J.J. Abrams", "Steven Spielberg", "James Cameron"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi film 11 Oscar kazandı?",
+      "secenekler": ["Titanic", "The Godfather", "Forrest Gump", "Gladiator"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Matrix filminin yönetmenleri kimlerdir?",
+      "secenekler": ["Coen Kardeşler", "Wachowski Kardeşler", "Nolan Kardeşler", "Russo Kardeşler"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi aktör Joker rolüyle Oscar kazandı?",
+      "secenekler": ["Jared Leto", "Heath Ledger", "Jack Nicholson", "Cesar Romero"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Inception filminin ana teması nedir?",
+      "secenekler": ["Rüya hırsızlığı", "Zaman yolculuğu", "Uzay keşfi", "Yapay zeka"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi film Cannes'da Altın Palmiye kazandı?",
+      "secenekler": ["Parasite", "Titanic", "Avatar", "The Dark Knight"],
+      "dogru": "A"
+    }
+  ],
+  "Müzik Modu": [
+    {
+      "soru": "Beethoven'ın ünlü 9. Senfonisi hangi anahtar tonundadır?",
+      "secenekler": ["Re minör", "Do majör", "Sol minör", "Fa majör"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi müzik türü 1950'lerde ABD'de ortaya çıktı?",
+      "secenekler": ["Jazz", "Rock and Roll", "Klasik", "Hip Hop"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi sanatçı 'Bohemian Rhapsody' şarkısını yazdı?",
+      "secenekler": ["Elton John", "Freddie Mercury", "David Bowie", "Paul McCartney"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Gitarın kaç teli vardır?",
+      "secenekler": ["4", "5", "6", "8"],
+      "dogru": "C"
+    },
+    {
+      "soru": "Hangi enstrüman 'çalgıların kralı' olarak bilinir?",
+      "secenekler": ["Piyano", "Keman", "Flüt", "Org"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi grup 'Hotel California' şarkısıyla ünlüdür?",
+      "secenekler": ["The Beatles", "The Eagles", "Nirvana", "Led Zeppelin"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Müzikte 'forte' ne anlama gelir?",
+      "secenekler": ["Yavaş", "Hızlı", "Yüksek sesle", "Alçak sesle"],
+      "dogru": "C"
+    },
+    {
+      "soru": "Hangi Türk sanatçı 'Hümeyra' olarak bilinir?",
+      "secenekler": ["Sezen Aksu", "Nilüfer", "Hümeyra", "Ajda Pekkan"],
+      "dogru": "C"
+    },
+    {
+      "soru": "Hangi müzik aleti nefesli bir enstrümandır?",
+      "secenekler": ["Keman", "Saksafon", "Gitar", "Davul"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Grammy Ödülleri hangi alanda verilir?",
+      "secenekler": ["Sinema", "Müzik", "Edebiyat", "Tiyatro"],
+      "dogru": "B"
+    }
+  ],
+  "Dil Bilgisi Modu": [
+    {
+      "soru": "Türkçede kaç harf vardır?",
+      "secenekler": ["26", "29", "32", "33"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi dil 'Latin' alfabesini kullanmaz?",
+      "secenekler": ["Türkçe", "Çince", "Fransızca", "Almanca"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Türkçede 'yapım eki' ne işe yarar?",
+      "secenekler": ["Cümle kurar", "Yeni kelime türetir", "Zaman bildirir", "Kişi bildirir"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi kelime bir sıfat değildir?",
+      "secenekler": ["Güzel", "Hızlı", "Koşmak", "Kırmızı"],
+      "dogru": "C"
+    },
+    {
+      "soru": "Hangi dil ailesine Türkçe aittir?",
+      "secenekler": ["Hint-Avrupa", "Ural-Altay", "Sami", "Bantu"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi kelime bir bağlaçtır?",
+      "secenekler": ["Ama", "Güzel", "Hızlı", "Naber"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Türkçede kaç tane sesli harf vardır?",
+      "secenekler": ["6", "8", "10", "12"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi kelime bir fiildir?",
+      "secenekler": ["Masa", "Yemek", "Güzel", "Okumak"],
+      "dogru": "D"
+    },
+    {
+      "soru": "Hangi dilde 'Merhaba' denir?",
+      "secenekler": ["İspanyolca", "Türkçe", "Almanca", "Japonca"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi ek, Türkçede çoğul eki olarak kullanılır?",
+      "secenekler": ["-ler, -lar", "-de, -da", "-ı, -i", "-m, -n"],
+      "dogru": "A"
+    }
+  ],
+  "Araba Modu": [
+    {
+      "soru": "Hangi araba markası 'Mustang' modelini üretir?",
+      "secenekler": ["Chevrolet", "Ford", "Dodge", "Toyota"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Ferrari hangi ülkenin markasıdır?",
+      "secenekler": ["Almanya", "İtalya", "Japonya", "Fransa"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi yakıt türü dizel motorlarda kullanılır?",
+      "secenekler": ["Benzin", "Dizel", "Elektrik", "Hidrojen"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi araba markası 'Civic' modelini üretir?",
+      "secenekler": ["Honda", "Toyota", "Nissan", "Hyundai"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Formula 1'de en çok şampiyonluk kazanan pilot kimdir?",
+      "secenekler": ["Michael Schumacher", "Lewis Hamilton", "Ayrton Senna", "Alain Prost"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi araba markası 'Golf' modelini üretir?",
+      "secenekler": ["Volkswagen", "BMW", "Mercedes-Benz", "Audi"],
+      "dogru": "A"
+    },
+    {
+      "soru": "ABS ne anlama gelir?",
+      "secenekler": ["Anti-lock Braking System", "Automatic Balance System", "Air Brake System", "Advanced Brake Support"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi araba markası lüks segmentte liderdir?",
+      "secenekler": ["Tesla", "Rolls-Royce", "Ford", "Kia"],
+      "dogru": "B"
+    },
+    {
+      "soru": "İlk seri üretim elektrikli araba hangi markaya aittir?",
+      "secenekler": ["Nissan Leaf", "Tesla Model S", "Chevrolet Volt", "Toyota Prius"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi ülkede BMW markası üretilir?",
+      "secenekler": ["Japonya", "Almanya", "Amerika", "İngiltere"],
+      "dogru": "B"
+    }
+  ],
+  "Kültür Modu": [
+    {
+      "soru": "Türkiye'nin başkenti neresidir?",
+      "secenekler": ["İstanbul", "Ankara", "İzmir", "Bursa"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi bayram İslam dininde kutlanır?",
+      "secenekler": ["Paskalya", "Ramazan Bayramı", "Noel", "Cadılar Bayramı"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi yemek Türk mutfağına aittir?",
+      "secenekler": ["Sushi", "Kebap", "Pizza", "Taco"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi dans türü Türkiye'de yaygındır?",
+      "secenekler": ["Salsa", "Zeybek", "Flamenko", "Tango"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi tarihi yapı İstanbul'dadır?",
+      "secenekler": ["Efes Antik Kenti", "Ayasofya", "Pamukkale", "Nemrut Dağı"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi şair 'Çocuk ve Allah' eserini yazmıştır?",
+      "secenekler": ["Nazım Hikmet", "Fazıl Hüsnü Dağlarca", "Orhan Veli", "Attila İlhan"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi enstrüman Türk halk müziğinde kullanılır?",
+      "secenekler": ["Gitar", "Saz", "Piyano", "Klarnet"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi şehir 'Halikarnas' olarak bilinir?",
+      "secenekler": ["Antalya", "Bodrum", "İzmir", "Muğla"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi festivalde semazenler döner?",
+      "secenekler": ["Mevlana Şeb-i Arus", "Antalya Film Festivali", "İstanbul Caz Festivali", "Aspendos Opera Festivali"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi Türk ressam 'Kaplumbağa Terbiyecisi' eserini yaptı?",
+      "secenekler": ["Osman Hamdi Bey", "Abidin Dino", "Fikret Mualla", "Bedri Rahmi Eyüboğlu"],
+      "dogru": "A"
+    }
+  ],
+  "Kapışma Modu": [
+    {
+      "soru": "Hangi gezegen 'Kızıl Gezegen' olarak bilinir?",
+      "secenekler": ["Venüs", "Mars", "Jüpiter", "Satürn"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi elementin simgesi 'Au' dur?",
+      "secenekler": ["Gümüş", "Altın", "Bakır", "Demir"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi hayvan memeli değildir?",
+      "secenekler": ["Yunus", "Timsah", "Orangutan", "Yarasa"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi ülke Güney Amerika'dadır?",
+      "secenekler": ["Meksika", "Brezilya", "Kanada", "Avustralya"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi matematikçi 'Sıfır' kavramını geliştirdi?",
+      "secenekler": ["Euclid", "Brahmagupta", "Pythagoras", "Archimedes"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi spor dalında 'smash' terimi kullanılır?",
+      "secenekler": ["Futbol", "Voleybol", "Basketbol", "Hentbol"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi yazar 'Suç ve Ceza' eserini yazmıştır?",
+      "secenekler": ["Tolstoy", "Dostoyevski", "Çehov", "Gogol"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi renk gökkuşağında yoktur?",
+      "secenekler": ["Kırmızı", "Pembe", "Mavi", "Yeşil"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi organ kanı temizler?",
+      "secenekler": ["Kalp", "Karaciğer", "Akciğer", "Mide"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi mucit elektriği keşfetmedi ama ampulü geliştirdi?",
+      "secenekler": ["Tesla", "Edison", "Faraday", "Volta"],
+      "dogru": "B"
+    }
+  ],
+  "Zaman Modu": [
+    {
+      "soru": "Hangi yıl Osmanlı Devleti kuruldu?",
+      "secenekler": ["1299", "1453", "1071", "1923"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi savaş 1914-1918 yılları arasında oldu?",
+      "secenekler": ["II. Dünya Savaşı", "I. Dünya Savaşı", "Kore Savaşı", "Vietnam Savaşı"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi yıl insan Ay'a ilk kez ayak bastı?",
+      "secenekler": ["1965", "1969", "1972", "1959"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi yüzyılda Rönesans başladı?",
+      "secenekler": ["13. yüzyıl", "14. yüzyıl", "15. yüzyıl", "16. yüzyıl"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi yıl İstanbul fethedildi?",
+      "secenekler": ["1453", "1492", "1517", "1299"],
+      "dogru": "A"
+    },
+    {
+      "soru": "Hangi yıl Türkiye Cumhuriyeti kuruldu?",
+      "secenekler": ["1919", "1923", "1920", "1938"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi mucit 19. yüzyılda telefonun patentini aldı?",
+      "secenekler": ["Edison", "Bell", "Tesla", "Marconi"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi yıl Berlin Duvarı yıkıldı?",
+      "secenekler": ["1985", "1989", "1991", "1993"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi savaş 1939-1945 yılları arasında oldu?",
+      "secenekler": ["I. Dünya Savaşı", "II. Dünya Savaşı", "Soğuk Savaş", "Kırım Savaşı"],
+      "dogru": "B"
+    },
+    {
+      "soru": "Hangi yıl internet halka açıldı?",
+      "secenekler": ["1983", "1991", "1975", "2000"],
+      "dogru": "B"
+    }
+  ]
+}

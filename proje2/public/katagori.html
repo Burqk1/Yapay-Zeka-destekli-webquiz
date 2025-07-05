@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kategoriler | Son Kararım!</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      /* min-height: 100vh; */
+      /* background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto', sans-serif;
+      /* color: #fff; */
+    }
+
+  </style>
+  <script>
+    try {
+      if (JSON.parse(localStorage.getItem('darkMode') ?? 'false')) {
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+      }
+    } catch(e){}
+  </script>
+</head>
+<body>
+
+
+
+    
+  <div class="category-container">
+    <h1 class="category-title" data-key="select_mode">Lütfen Mod Seçiniz</h1>
+    <div class="category-grid">
+      <div class="category-card" data-info="Oyuncunun belirlenen süre içerisinde soruları doğru cevaplamaya çalıştığı oyun modudur." onclick="kategoriSec('Zaman Modu')">
+        <img src="image/zaman.jpg" alt="Zaman">
+        <div class="category-name" data-key="mode_zaman">Zaman Modu</div>
+      </div>
+      <div class="category-card" data-info="Bu mod, liderlik tablosuna bağlıdır. Oyuncuların bildikleri soru kadar puan topladığı ve kapıştığı oyun modudur." onclick="kategoriSec('Kapışma Modu')">
+        <img src="image/vss.jpg" alt="Kapışma">
+        <div class="category-name" data-key="mode_kapisma">Kapışma Modu</div>
+      </div>
+      <div class="category-card" data-info="Karma şekilde genel kültür sorularının sorulduğu oyun modudur." onclick="kategoriSec('Kültür Modu')">
+        <img src="image/düzeltilmiş.jpg" alt="Kültür">
+        <div class="category-name" data-key="mode_kultur">Kültür Modu</div>
+      </div>
+      <div class="category-card" data-info="Otomobil dünyasına dair, araba markaları, modelleri, teknik özellikler veya otomobil kültürüyle ilgili soruların yer aldığı oyun modudur." onclick="kategoriSec('Araba Modu')">
+        <img src="image/cars.jpg" alt="Araba">
+        <div class="category-name" data-key="mode_araba">Araba Modu</div>
+      </div>
+      <div class="category-card" data-info="Bu mod, dillerin tarihi, gelişimi, kuralları gibi genel bazlı soruların sorulduğu oyun modudur." onclick="kategoriSec('Dil Bilgisi Modu')">
+        <img src="image/dill.jpg" alt="Dil">
+        <div class="category-name" data-key="mode_dil">Dil Bilgisi Modu</div>
+      </div>
+      <div class="category-card" data-info="Müzik dünyasına dair, şarkılar, sanatçılar, albümler, müzik teorisi ve tarihinden soruların sorulduğu oyun modudur." onclick="kategoriSec('Müzik Modu')">
+        <img src="image/müzikk.jpg" alt="Müzik">
+        <div class="category-name" data-key="mode_muzik">Müzik Modu</div>
+      </div>
+      <div class="category-card" data-info="Bu mod, filmler, yönetmenler, oyuncular, film ödülleri ve sinema tarihinden soruların sorulduğu oyun modudur." onclick="kategoriSec('Sinema Modu')">
+        <img src="image/cinema.jpg" alt="Sinema">
+        <div class="category-name" data-key="mode_sinema">Sinema Modu</div>
+      </div>
+      <div class="category-card" data-info="Bu mod, bilgisayarlar, telefonlar, yazılımlar, yenilikçi teknolojiler ve teknoloji tarihinden soruların sorulduğu oyun modudur." onclick="kategoriSec('Teknoloji Modu')">
+        <img src="image/teknoloji.png" alt="Teknoloji">
+        <div class="category-name" data-key="mode_teknoloji">Teknoloji Modu</div>
+      </div>
+    </div>
+    <div id="infoBox" class="info-box" data-key="mode_info">Mod Bilgileri Burada</div>
+    <a class="main-menu-link" id="mainMenuBtn" style="margin-top:1.5rem;display:inline-block;cursor:pointer;" data-key="main_menu">Ana Menüye Dön</a>
+  </div>
+
+
+
+  <script>
+
+  function kategoriSec(kategori) {
+    localStorage.setItem('seciliKategori', kategori);
+    window.location.href = 'chat.html';
+  }
+
+    window.onload = async function() {
+      try {
+        const res = await fetch('/api/user');
+        if (!res.ok) {
+          window.location.href = "index.html";
+          return;
+        }
+
+      } catch (err) {
+        window.location.href = "index.html";
+        return;
+      }
+
+    };
+
+    const cards = document.querySelectorAll('.category-card');
+    const infoBox = document.getElementById('infoBox');
+
+    cards.forEach(card => {
+      card.addEventListener('mouseover', () => {
+        infoBox.textContent = card.getAttribute('data-info');
+      });
+      card.addEventListener('mouseout', () => {
+        infoBox.textContent = 'Mod Bilgileri Burada';
+      });
+    });
+
+    function goToMode(mode) {
+      window.location.href = `oyun.html?mode=${encodeURIComponent(mode)}`;
+    }
+
+    document.getElementById('mainMenuBtn').onclick = function(e) {
+      e.preventDefault();
+      if (typeof animatedRedirect === 'function') {
+        animatedRedirect('anasayfa.html');
+      } else {
+        window.location.href = 'anasayfa.html';
+      }
+    };
+
+    try {
+      const darkMode = JSON.parse(localStorage.getItem('darkMode') ?? 'false');
+      if (typeof applyDarkMode === 'function') applyDarkMode(darkMode);
+    } catch(e) {}
+  </script>
+    <script src="script.js"></script>
+
+</body>
+</html>

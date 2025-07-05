@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Soru Havuzu | Son Kararım!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto', sans-serif;
+    }
+    body.dark-mode {
+      background: linear-gradient(135deg, #18181a, #321858);
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <div class="soru-havuzu-flex">
+    <div class="soru-form-container">
+      <h2 data-key="question_pool_title">Soru Havuzu</h2>
+      <form class="soru-form" id="soruForm">
+        <label for="questionText" data-key="question_label">Soru</label>
+        <input type="text" id="questionText" name="questionText" required placeholder="Soru metni" data-key="question_placeholder">
+        <div class="options-row">
+          <input type="text" id="optionA" name="optionA" required placeholder="A şıkkı" data-key="option_a_placeholder">
+          <input type="text" id="optionB" name="optionB" required placeholder="B şıkkı" data-key="option_b_placeholder">
+        </div>
+        <div class="options-row">
+          <input type="text" id="optionC" name="optionC" required placeholder="C şıkkı" data-key="option_c_placeholder">
+          <input type="text" id="optionD" name="optionD" required placeholder="D şıkkı" data-key="option_d_placeholder">
+        </div>
+        <label for="correctAnswer" data-key="correct_option_label">Doğru Şık</label>
+        <select id="correctAnswer" name="correctAnswer" >
+          <option value="A" >A</option>
+          <option value="B" >B</option>
+          <option value="C" >C</option>
+          <option value="D" >D</option>
+        </select>
+        <label for="category" data-key="category_label">Kategori (isteğe bağlı)</label>
+        <input type="text" id="category" name="category" placeholder="Kategori (ör: Teknoloji)" data-key="category_placeholder">
+        <button type="submit" class="submit-btn" data-key="add_question_btn">Soru Ekle</button>
+        <div style="text-align:center;  margin-bottom: 1.2rem;"> 
+          <a class="main-menu-link" id="mainMenuBtn" style="display:inline-block;cursor:pointer;" data-key="main_menu">Ana Menüye Dön</a>
+        </div> 
+      </form>
+    </div>
+    <div class="soru-list-container">
+      <h3 data-key="your_questions_title">Eklediğiniz Sorular</h3>
+      <div id="sorularContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    function fetchSorular() {
+      const container = document.getElementById('sorularContainer');
+      container.innerHTML = '';
+      const example = {
+        questionText: "Türkiye Cumhuriyeti'nin kurucusu kimdir?",
+        options: ['Mustafa Kemal Atatürk', 'Fatih Sultan Mehmet', 'Yavuz Sultan Selim', 'Kanuni Sultan Süleyman'],
+        correctAnswer: 'A',
+        category: 'Tarih'
+      };
+      const div = document.createElement('div');
+      div.className = 'soru-card';
+      div.innerHTML = `
+        <div class="kategori">${example.category}</div>
+        <div class="soru-text">${example.questionText}</div>
+        <div class="siklar">
+          <span class="${example.correctAnswer === 'A' ? 'dogru' : ''}">A: ${example.options[0]}</span>
+          <span class="${example.correctAnswer === 'B' ? 'dogru' : ''}">B: ${example.options[1]}</span>
+          <span class="${example.correctAnswer === 'C' ? 'dogru' : ''}">C: ${example.options[2]}</span>
+          <span class="${example.correctAnswer === 'D' ? 'dogru' : ''}">D: ${example.options[3]}</span>
+        </div>
+        <div class="dogru">Doğru: ${example.correctAnswer}</div>
+      `;
+      container.appendChild(div);
+      const info = document.createElement('div');
+      info.style = 'color:#fff;opacity:0.7;margin-top:0.7rem;';
+      // info.textContent = 'Henüz soru eklemediniz. Yukarıdaki örnek gösterilmektedir.';
+      container.appendChild(info);
+    }
+    document.addEventListener('DOMContentLoaded', fetchSorular);
+
+    document.getElementById('soruForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const questionText = document.getElementById('questionText').value.trim();
+      const optionA = document.getElementById('optionA').value.trim();
+      const optionB = document.getElementById('optionB').value.trim();
+      const optionC = document.getElementById('optionC').value.trim();
+      const optionD = document.getElementById('optionD').value.trim();
+      const correctAnswer = document.getElementById('correctAnswer').value;
+      const category = document.getElementById('category').value.trim();
+      if (!questionText || !optionA || !optionB || !optionC || !optionD) {
+        alert('Lütfen tüm alanları doldurun!');
+        return;
+      }
+      const res = await fetch('/api/questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          questionText,
+          options: [optionA, optionB, optionC, optionD],
+          correctAnswer,
+          category
+        })
+      });
+      if (res.ok) {
+        document.getElementById('soruForm').reset();
+        fetchSorular();
+      } else {
+        const data = await res.json();
+        alert(data.message || 'Soru eklenemedi!');
+      }
+    });
+    try {
+      if (JSON.parse(localStorage.getItem('darkMode') ?? 'false')) {
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+      }
+    } catch(e){}
+    document.getElementById('mainMenuBtn').onclick = function(e) {
+      e.preventDefault();
+      if (typeof animatedRedirect === 'function') {
+        animatedRedirect('anasayfa.html');
+      } else {
+        window.location.href = 'anasayfa.html';
+      }
+    };
+
+        // async function fetchSorular() {
+    //   const res = await fetch('/api/questions/mine');
+    //   const data = await res.json();
+    //   const container = document.getElementById('sorularContainer');
+    //   container.innerHTML = '';
+    //   if (!Array.isArray(data) || data.length === 0) {
+    //     container.innerHTML = '<div style="color:#fff;opacity:0.7;">Henüz soru eklemediniz.</div>';
+    //     return;
+    //   }
+    //   data.forEach(soru => {
+    //     const div = document.createElement('div');
+    //     div.className = 'soru-card';
+    //     div.innerHTML = `
+    //       <div class="kategori">${soru.category ? soru.category : ''}</div>
+    //       <div class="soru-text">${soru.questionText}</div>
+    //       <div class="siklar">
+    //         <b>A:</b> ${soru.options[0]}<br>
+    //         <b>B:</b> ${soru.options[1]}<br>
+    //         <b>C:</b> ${soru.options[2]}<br>
+    //         <b>D:</b> ${soru.options[3]}
+    //       </div>
+    //       <div class="dogru">Doğru: ${soru.correctAnswer}</div>
+    //     `;
+    //     container.appendChild(div);
+    //   });
+    // }
+
+
+
+  </script>
+    <script src="script.js"></script>
+
+</body>
+</html> 

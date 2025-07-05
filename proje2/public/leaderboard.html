@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Lider Tablosu</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      /* min-height: 100vh; */
+      /* background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto', sans-serif;
+      /* color: #fff; */
+    }
+
+  </style>
+
+  <script>
+    try {
+      if (JSON.parse(localStorage.getItem('darkMode') ?? 'false')) {
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+      }
+    } catch(e){}
+  </script>
+</head>
+<body>
+  <div class="leaderboard-card">
+    <div class="leaderboard-title-row">
+      <div class="leaderboard-title" data-key="leaderboard_title">Lider Tablosu</div>
+    </div>
+    <div class="kategori-scroll-bar" id="kategoriScrollBar">
+      <div class="kategori-item selected" data-value="overall" data-key="cat_overall">Genel</div>
+      <div class="kategori-item" data-value="Teknoloji" data-key="cat_teknoloji">Teknoloji</div>
+      <div class="kategori-item" data-value="Sinema" data-key="cat_sinema">Sinema</div>
+      <div class="kategori-item" data-value="Muzik" data-key="cat_muzik">Müzik</div>
+      <div class="kategori-item" data-value="Dil" data-key="cat_dil">Dil</div>
+      <div class="kategori-item" data-value="Araba" data-key="cat_araba">Araba</div>
+      <div class="kategori-item" data-value="Kultur" data-key="cat_kultur">Kültür</div>
+      <div class="kategori-item" data-value="Kapisma" data-key="cat_kapisma">Kapışma</div>
+      <div class="kategori-item" data-value="Zaman" data-key="cat_zaman">Zaman</div>
+    </div>
+    <div id="leaderboard"></div>
+    <a class="main-menu-link" id="mainMenuBtn" style="cursor:pointer;" data-key="main_menu">Ana Menüye Dön</a>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const bar = document.getElementById('kategoriScrollBar');
+      let selectedKategori = 'overall';
+      bar.querySelectorAll('.kategori-item').forEach(function(item) {
+        item.addEventListener('click', async function() {
+          bar.querySelectorAll('.kategori-item').forEach(i => i.classList.remove('selected'));
+          item.classList.add('selected');
+          selectedKategori = item.getAttribute('data-value');
+          const leaderboardDiv = document.getElementById('leaderboard');
+          leaderboardDiv.classList.remove('fade-in');
+          leaderboardDiv.classList.add('fade-out');
+          setTimeout(() => {
+            renderLeaderboard(exampleDataByCategory[selectedKategori] || [], selectedKategori);
+            leaderboardDiv.classList.remove('fade-out');
+            leaderboardDiv.classList.add('fade-in');
+          }, 350);
+        });
+      });
+      renderLeaderboard(exampleDataByCategory['overall'], 'overall');
+      document.getElementById('leaderboard').classList.add('fade-in');
+    });
+
+    const exampleDataByCategory = {
+      overall: [
+        { username: 'ahmet', fullname: 'Ahmet Yılmaz', profilePic: 'image/Default_pfp.jpg', puan: 950 },
+        { username: 'ayse', fullname: 'Ayşe Demir', profilePic: 'image/Default_pfp.jpg', puan: 900 },
+        { username: 'mehmet', fullname: 'Mehmet Kaya', profilePic: 'image/Default_pfp.jpg', puan: 850 },
+        { username: 'zeynep', fullname: 'Zeynep Şahin', profilePic: 'image/Default_pfp.jpg', puan: 800 },
+        { username: 'burak', fullname: 'Burak Can', profilePic: 'image/Default_pfp.jpg', puan: 780 },
+        { username: 'elif', fullname: 'Elif Güneş', profilePic: 'image/Default_pfp.jpg', puan: 760 },
+        { username: 'mert', fullname: 'Mert Aksoy', profilePic: 'image/Default_pfp.jpg', puan: 740 },
+        { username: 'can', fullname: 'Can Polat', profilePic: 'image/Default_pfp.jpg', puan: 700 },
+
+        { username: 'selin', fullname: 'Selin Yıldız', profilePic: 'image/Default_pfp.jpg', puan: 720 },
+      ],
+      Teknoloji: [
+        { username: 'ahmet', fullname: 'Ahmet Yılmaz', profilePic: 'image/Default_pfp.jpg', puan: 500 },
+        { username: 'ayse', fullname: 'Ayşe Demir', profilePic: 'image/Default_pfp.jpg', puan: 480 },
+        { username: 'mehmet', fullname: 'Mehmet Kaya', profilePic: 'image/Default_pfp.jpg', puan: 470 },
+      ],
+      Sinema: [
+        { username: 'zeynep', fullname: 'Zeynep Şahin', profilePic: 'image/Default_pfp.jpg', puan: 600 },
+        { username: 'burak', fullname: 'Burak Can', profilePic: 'image/Default_pfp.jpg', puan: 590 },
+      ],
+      Muzik: [
+        { username: 'elif', fullname: 'Elif Güneş', profilePic: 'image/Default_pfp.jpg', puan: 700 },
+        { username: 'mert', fullname: 'Mert Aksoy', profilePic: 'image/Default_pfp.jpg', puan: 650 },
+      ],
+      Dil: [
+        { username: 'selin', fullname: 'Selin Yıldız', profilePic: 'image/Default_pfp.jpg', puan: 400 },
+      ],
+      Araba: [
+        { username: 'can', fullname: 'Can Polat', profilePic: 'image/Default_pfp.jpg', puan: 300 },
+      ],
+      Kultur: [
+        { username: 'ayse', fullname: 'Ayşe Demir', profilePic: 'image/Default_pfp.jpg', puan: 200 },
+      ],
+      Kapisma: [
+        { username: 'mehmet', fullname: 'Mehmet Kaya', profilePic: 'image/Default_pfp.jpg', puan: 100 },
+      ],
+      Zaman: [
+        { username: 'ahmet', fullname: 'Ahmet Yılmaz', profilePic: 'image/Default_pfp.jpg', puan: 50 },
+      ],
+    };
+
+    function renderLeaderboard(data, kategori) {
+      data = [...data].sort((a, b) => (b.puan ?? b.toplam ?? 0) - (a.puan ?? a.toplam ?? 0));
+      const leaderboardDiv = document.getElementById('leaderboard');
+      let html = '';
+      if (data.length === 0) {
+        html = '<div>Henüz veri yok.</div>';
+      } else {
+        html += `<table style=\"width:100%;border-collapse:collapse;\">\n<tr><th style='text-align:left;'>#</th><th style='text-align:left;'>Kullanıcı</th><th>Puan</th></tr>`;
+        data.forEach((u,i)=>{
+          let kupa = '';
+          if(i===0) kupa = '🥇';
+          else if(i===1) kupa = '🥈';
+          else if(i===2) kupa = '🥉';
+          html += `<tr class='${i<3?"ilk3":""}'>\n<td>${kupa||i+1}</td>\n<td><img src=\"${u.profilePic||'image/Default_pfp.jpg'}\" style=\"width:32px;height:32px;border-radius:50%;vertical-align:middle;margin-right:8px;\">${u.fullname||u.username}</td>\n<td>${u.puan!==undefined?u.puan:u.toplam}</td>\n</tr>`;
+        });
+        html += '</table>';
+      }
+      leaderboardDiv.innerHTML = html;
+    }
+
+    document.getElementById('mainMenuBtn').onclick = function(e) {
+      e.preventDefault();
+      if (typeof animatedRedirect === 'function') {
+        animatedRedirect('anasayfa.html');
+      } else {
+        window.location.href = 'anasayfa.html';
+      }
+    };
+
+    /*
+    async function fetchLeaderboard(kategori) {
+      let url = kategori === 'overall' ? '/api/leaderboard/overall' : `/api/leaderboard/${kategori}`;
+      const res = await fetch(url);
+      if (!res.ok) return [];
+      return await res.json();
+    }
+    // let data = await fetchLeaderboard(selectedKategori);
+    // renderLeaderboard(data, selectedKategori);
+    */
+
+    try {
+      const darkMode = JSON.parse(localStorage.getItem('darkMode') ?? 'false');
+      if (typeof applyDarkMode === 'function') applyDarkMode(darkMode);
+    } catch(e) {}
+  </script>
+
+<script src="script.js"></script>
+
+</body>
+</html> 

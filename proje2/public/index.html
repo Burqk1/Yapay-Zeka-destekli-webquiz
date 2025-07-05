@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Son Kararım - Giriş/Kayıt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+    
+  <script>
+    try {
+      if (JSON.parse(localStorage.getItem('darkMode') ?? 'false')) {
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+      }
+    } catch(e){}
+  </script>
+
+  <style>
+    .hidden {
+      display: none;
+    }
+    body {
+      margin: 0;
+      /* min-height: 100vh; */
+      /* background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto', sans-serif;
+      /* color: #fff; */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="language-dropdown">
+    <button class="lang-btn" id="langBtn">
+      <img src="flags/tr.png" alt="Türkçe" class="lang-flag">
+      <span class="selected-lang">Türkçe</span>
+      <span class="arrow">&#9662;</span>
+    </button>
+    <ul class="lang-menu hidden" id="langMenu">
+      <li data-lang="en">
+        <img src="flags/us.svg" alt="English" class="lang-flag">
+        <span>English</span>
+        <span class="check">&#10003;</span>
+      </li>
+      <li data-lang="tr">
+        <img src="flags/tr.png" alt="Türkçe" class="lang-flag">
+        <span>Türkçe</span>
+        <span class="check">&#10003;</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="container">
+    <div id="loginFormContainer" class="form-container">
+      <form id="loginForm" novalidate>
+        <h2 data-key="login_title">Hesabınıza giriş yapın</h2>
+        <div class="form-group">
+          <label for="loginUsername" data-key="username_label">Kullanıcı Adı</label>
+          <input 
+            type="text" 
+            id="loginUsername" 
+            name="username" 
+            placeholder="Kullanıcı Adı" 
+            data-placeholder="username_placeholder"
+            required 
+            aria-required="true">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword" data-key="password_label">Şifre</label>
+          <div class="password-wrapper">
+            <input 
+              type="password" 
+              id="loginPassword" 
+              name="password" 
+              placeholder="Şifre"
+              data-placeholder="password_placeholder"
+              required 
+              aria-required="true">
+            <button 
+              type="button" 
+              class="toggle-password" 
+              data-key="show_btn"
+              onclick="togglePassword('loginPassword', this)">Göster</button>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" data-key="login_btn">Giriş Yap</button>
+
+        <div class="social-login">
+          <p data-key="social_text">veya sosyal hesapla giriş yap</p>
+
+          <button type="button"                      
+                  class="social-btn google-btn"
+                  onclick="location.href='/auth/google'">
+            <img src="google-icon.svg" alt="Google" class="social-icon">
+            <span data-key="google_text">Google</span>
+          </button>
+          <button type="button"                    
+                  class="social-btn facebook-btn"
+                  onclick="location.href='/auth/facebook'">
+            <img src="facebook-icon.svg" alt="Facebook" class="social-icon">
+            <span data-key="facebook_text">Facebook</span>
+          </button>
+        </div>
+
+
+        <p class="switch-text" data-key="not_registered">
+          Henüz kayıtlı değil misiniz? 
+          <a href="#" id="goToRegister" data-key="go_to_register">Kayıt Ol</a>
+        </p>
+      </form>
+    </div>
+
+    <div id="registerFormContainer" class="form-container hidden">
+      <form id="registerForm" novalidate>
+        <h2 data-key="register_title">Kayıt Ol</h2>
+        <div class="form-group">
+          <label for="fullname" data-key="fullname_label">Ad Soyad</label>
+          <input 
+            type="text" 
+            id="fullname" 
+            name="fullname" 
+            placeholder="Ad Soyad" 
+            data-placeholder="fullname_placeholder"
+            required 
+            aria-required="true">
+        </div>
+        <div class="form-group">
+          <label for="registerUsername" data-key="username_label">Kullanıcı Adı</label>
+          <input 
+            type="text" 
+            id="registerUsername" 
+            name="username" 
+            placeholder="Kullanıcı Adı" 
+            data-placeholder="username_placeholder"
+            required 
+            aria-required="true">
+        </div>
+        <div class="form-group">
+          <label for="email" data-key="email_label">E-posta</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            placeholder="E-posta" 
+            data-placeholder="email_placeholder"
+            required 
+            aria-required="true">
+          <span id="emailError" class="error-message"></span>
+        </div>
+        <div class="form-group">
+          <label for="role">Rol</label>
+          <select id="role" name="role" required aria-required="true" onchange="toggleTeacherCode()">
+            <option value="student">Öğrenci</option>
+            <option value="teacher">Öğretmen</option>
+          </select>
+        </div>
+        <div class="form-group hidden" id="teacherCodeGroup">
+          <label for="teacherCode">Öğretmen Kodu</label>
+          <input type="text" id="teacherCode" name="teacherCode" placeholder="Öğretmen Kodu">
+        </div>
+        <div class="form-group">
+          <label for="registerPassword" data-key="password_label">Şifre</label>
+          <div class="password-wrapper">
+            <input 
+              type="password" 
+              id="registerPassword" 
+              name="password" 
+              placeholder="Şifre"
+              data-placeholder="password_placeholder"
+              required 
+              aria-required="true">
+            <button 
+              type="button" 
+              class="toggle-password"
+              data-key="show_btn"
+              onclick="togglePassword('registerPassword', this)">Göster</button>
+          </div>
+          <div id="passwordStrength" class="strength-meter">
+            <div class="strength-bar"></div>
+            <span class="strength-text"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword" data-key="confirm_password_label">Şifre (Tekrar)</label>
+          <div class="password-wrapper">
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              placeholder="Şifre (Tekrar)"
+              data-placeholder="password_repeat_placeholder"
+              required 
+              aria-required="true">
+            <button 
+              type="button" 
+              class="toggle-password"
+              data-key="show_btn"
+              onclick="togglePassword('confirmPassword', this)">Göster</button>
+          </div>
+          <span id="passwordError" class="error-message"></span>
+        </div>
+        <button type="submit" class="submit-btn" data-key="register_btn">Kayıt Ol</button>
+        <p class="switch-text" data-key="already_registered">
+          Zaten bir hesabınız var mı? 
+          <a href="#" id="goToLogin" data-key="go_to_login">Giriş Yap</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="script.js"></script>
+  <script>
+    try {
+      const darkMode = JSON.parse(localStorage.getItem('darkMode') ?? 'false');
+      if (typeof applyDarkMode === 'function') applyDarkMode(darkMode);
+    } catch(e) {}
+
+
+    function toggleTeacherCode() {
+      var role = document.getElementById('role').value;
+      var group = document.getElementById('teacherCodeGroup');
+      if (role === 'teacher') {
+        group.classList.remove('hidden');
+        document.getElementById('teacherCode').setAttribute('required', 'true');
+      } else {
+        group.classList.add('hidden');
+        document.getElementById('teacherCode').removeAttribute('required');
+      }
+    }
+    window.addEventListener('DOMContentLoaded', function() {
+      toggleTeacherCode();
+    });
+  </script>
+</body>
+</html>

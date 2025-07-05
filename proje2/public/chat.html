@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Son Kararım!</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      /* background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%); */
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      height: 100vh;
+      overflow: hidden;
+    }
+  </style>
+  <script>
+    try {
+      if (JSON.parse(localStorage.getItem('darkMode') ?? 'false')) {
+        document.documentElement.classList.add('dark-mode');
+        document.body.classList.add('dark-mode');
+      }
+    } catch(e){}
+  </script>
+</head>
+<body>
+  <div id="hazirlik-ekrani" class="hazirlik-modal">
+    <div class="hazirlik-icerik hazirlik-anim-in">
+      <h2 id="hazirlik-baslik" data-key="quiz_ready_title"></h2>
+      <p id="hazirlik-aciklama" data-key="quiz_ready_desc"></p>
+      <div class="hazirlik-btn-row">
+        <button id="hazirim-btn" data-key="ready_btn">Hazırım</button>
+        <button id="iptal-btn" class="iptal-btn" data-key="cancel_btn">İptal</button>
+      </div>
+    </div>
+  </div>
+  <template id="profile-bar-template">
+    <div class="profile-container" onclick="toggleDropdown()">
+      <img id="profileImage" src="image/Default_pfp.jpg" alt="Profile Picture" class="profile-pic">
+      <span class="profile-name">Kullanıcı Adı</span>
+    </div>
+    <div id="profileDropdown" class="dropdown">
+      <label for="profileInput">Profil Resmi Yükle</label>
+      <a onclick="removeProfilePic()">Profil Resmini Sil</a>
+      <a onclick="logout()">Çıkış</a>
+    </div>
+    <input type="file" id="profileInput" accept="image/*" onchange="uploadProfilePic(event)">
+  </template>
+  <div class="milyoner-main" id="milyoner-main" style="display:none;">
+    <div class="quiz-header" style="position: fixed; top: 24px; right: 32px; display: flex; flex-direction: column; align-items: flex-end; z-index: 30; gap: 0.7rem;">
+      <div class="joker-bar">
+        <button class="joker-btn" id="joker-5050" title="50:50">
+          <img src="image/joker-5050.svg" alt="50:50">
+        </button>
+        <button class="joker-btn" id="joker-audience" title="Seyirci">
+          <img src="image/joker-audience.svg" alt="Seyirci">
+        </button>
+        <button class="joker-btn" id="joker-phone" title="Telefon">
+          <img src="image/joker-phone.svg" alt="Telefon">
+        </button>
+        <span class="all-jokers-used" style="display:none;">Tüm jokerler kullanıldı</span>
+      </div>
+      <div class="puan-bar" id="puan">Puan: 0</div>
+    </div>
+    <div class="milyoner-card" id="milyoner-card" style="margin-top: 80px;">
+      <div class="timer-badge"><span id="timer">20</span></div>
+      <div class="milyoner-progress" id="milyoner-progress"></div>
+      <div class="media-area" id="media-area" style="display:none;"></div>
+      <div class="milyoner-soru" id="milyoner-soru"></div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-bar-fill"></div></div>
+      <div class="milyoner-secenekler" style="margin-top: 0.7rem;">
+        <div class="milyoner-secenek-row">
+          <button class="milyoner-secenek" id="secenekA"><span class="secenek-harf">A</span><span class="secenek-text"></span></button>
+          <button class="milyoner-secenek" id="secenekB"><span class="secenek-harf">B</span><span class="secenek-text"></span></button>
+        </div>
+        <div class="milyoner-secenek-row">
+          <button class="milyoner-secenek" id="secenekC"><span class="secenek-harf">C</span><span class="secenek-text"></span></button>
+          <button class="milyoner-secenek" id="secenekD"><span class="secenek-harf">D</span><span class="secenek-text"></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <audio id="audio-correct" src="image/correct.mp3" preload="auto"></audio>
+  <audio id="audio-wrong" src="image/wrong.mp3" preload="auto"></audio>
+  <script src="script.js"></script>
+  <div id="toast" class="toast hidden"></div>
+</body>
+</html>
