@@ -31,7 +31,7 @@
 proje2/
 ├── server.js              # Express sunucusu, Mongoose modelleri, tüm API uçları
 ├── package.json
-├── .env                   # Ortam değişkenleri (aşağıya bakın)
+├── .env.example           # Örnek ortam değişkenleri; .env olarak kopyalayın (aşağıya bakın)
 └── public/
     ├── index.html         # Giriş / kayıt
     ├── anasayfa.html      # Ana menü + ayarlar modalı
@@ -56,16 +56,16 @@ proje2/
 
 ```bash
 cd proje2
+cp .env.example .env       # sonra değerleri doldurun
 npm install
-npm install node-fetch@2   # server.js bunu kullanıyor ama package.json'da yok
 npm start                  # node server.js
 ```
 
-Sunucu varsayılan olarak `http://localhost:3000` adresinde açılıyor (`PORT` değişkeniyle değiştirilebilir). `node_modules` klasörü depoya da eklenmiş durumda; içindeki `node-fetch` sürümü 2.7.0. Temiz bir kurulumda `node-fetch` yüklenmezse sunucu açılışta hata verir. `require('node-fetch')` 3.x sürümüyle çalışmadığı için 2.x sürümü gerekiyor.
+Sunucu varsayılan olarak `http://localhost:3000` adresinde açılıyor (`PORT` değişkeniyle değiştirilebilir). `node_modules` depoda tutulmuyor; `npm install` ile kuruluyor. `require('node-fetch')` 3.x sürümüyle çalışmadığı için `package.json` içinde `node-fetch` 2.x (`^2.7.0`) tanımlı.
 
 ## Yapılandırma
 
-`proje2/.env` dosyasında şu değişkenler okunuyor:
+`proje2/.env` dosyasında şu değişkenler okunuyor. Dosya git'e eklenmiyor (`.gitignore`); şablon olarak `proje2/.env.example` kullanın:
 
 | Değişken | Açıklama |
 |---|---|
@@ -74,11 +74,11 @@ Sunucu varsayılan olarak `http://localhost:3000` adresinde açılıyor (`PORT` 
 | `JWT_SECRET` | JWT imzalama anahtarı |
 | `PORT` | Sunucu portu (varsayılan 3000) |
 | `HUGGING_FACE_TOKEN` | Hugging Face Inference API token'ı |
-| `GOOGLE_ID`, `GOOGLE_SECRET` | `.env` içinde tanımlı ama `server.js` tarafından kullanılmıyor |
+| `GOOGLE_ID`, `GOOGLE_SECRET` | `.env.example` içinde var ama `server.js` tarafından kullanılmıyor |
 
 `NODE_ENV=production` olduğunda oturum çerezi `secure` olarak işaretleniyor; bu durumda HTTPS gerekiyor.
 
-> **Güvenlik uyarısı:** `.env` dosyası git'e eklenmiş durumda. İçindeki veritabanı adresi, gizli anahtarlar ve token'lar herkese açık kabul edilmeli. Bu değerleri yenileyin ve `.env` dosyasını `.gitignore`'a ekleyin.
+> **Güvenlik uyarısı:** `.env` dosyası daha önce git'e eklenmişti ve git geçmişinde hâlâ duruyor. O dosyadaki veritabanı adresi, gizli anahtarlar ve token'lar herkese açık kabul edilmeli ve yenilenmeli.
 
 ## API uçları
 
@@ -102,7 +102,7 @@ Soru formatı (hem yapay zeka çıktısı hem `questions.json` için):
 ## Bilinen eksikler
 
 - `leaderboard.html` şu an API'den veri çekmiyor; sayfa içine yazılmış örnek verileri gösteriyor (`/api/leaderboard` çağrısı yorum satırında).
-- `soruhavuzu.html` formu `POST /api/questions` adresine gönderiliyor, ama sunucuda bu uç yok (mevcut uç `/api/questions/add`) ve istek token içermiyor. Liste kısmı da sabit bir örnek soru gösteriyor.
+- `soruhavuzu.html` formu soruları `POST /api/questions/add` ile kaydediyor, ama liste kısmı hâlâ sabit bir örnek soru gösteriyor (`/api/questions/user` çağrılmıyor).
 - Giriş ekranındaki Google ve Facebook butonları `/auth/google` ve `/auth/facebook` adreslerine yönlendiriyor, ama bu rotalar tanımlı değil. `passport` paketleri bağımlılıklarda var fakat kullanılmıyor.
 - Ana sayfadaki `highscores.html` bağlantısı ve sunucudaki `/settings.html` rotası, depoda olmayan dosyalara işaret ediyor.
 - Seyirci ve Telefon jokerleri işlevsel değil (demo).

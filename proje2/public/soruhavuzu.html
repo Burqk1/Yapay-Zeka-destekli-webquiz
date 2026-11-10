@@ -102,13 +102,16 @@
         alert('Lütfen tüm alanları doldurun!');
         return;
       }
-      const res = await fetch('/api/questions', {
+      const res = await fetch('/api/questions/add', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        },
         body: JSON.stringify({
-          questionText,
+          question: questionText,
           options: [optionA, optionB, optionC, optionD],
-          correctAnswer,
+          correct: correctAnswer,
           category
         })
       });
